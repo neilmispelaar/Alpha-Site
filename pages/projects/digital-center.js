@@ -15,8 +15,8 @@ function ThumbnailWithCaption({
     <div>
       <h3 className="text-lg mt-3">{title}</h3>
       <figure className="shadow-experiment-shadow">
-        <img src={src} alt="" className="thumbnail" />
-        <figcaption className="text-sm p-8">{caption}</figcaption>
+        <img src={src} alt="" className="border-b-2" />
+        <figcaption className="text-base p-8">{caption}</figcaption>
       </figure>
     </div>
   );
@@ -29,7 +29,7 @@ ThumbnailWithCaption.propTypes = {
 };
 
 const imgSrc =
-  "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg";
+  "../dc-1.1.jpg";
 
 export default function Home(props) {
   const { t } = useTranslation(["common", "dc"]);
@@ -68,27 +68,40 @@ export default function Home(props) {
         <p className="text-base mt-3">{t("dc:intro-2")}</p>
 
         <h2 className="text-lg mt-8">{t("dc:h2-1")}</h2>
-        <p className="text-base mt-3">{t("dc:concept1-1")}</p>
-        <p className="text-base mt-3">{t("dc:concept1-2")}</p>
-        <p className="text-base mt-3">{t("dc:concept1-3")}</p>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mt-3">
+        <p className="text-base mt-6">{t("dc:concept1-1")}</p>
+        <p className="text-base mt-6">{t("dc:concept1-2")}</p>
+        <p className="text-base mt-6">{t("dc:concept1-3")}</p>
+        
+        <div className="mx-auto">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+          <div class="flex justify-center">
           <ThumbnailWithCaption
             title={t("dc:concept1-imgTitle-1")}
             src={imgSrc}
             caption={t("dc:concept1-imgCaption-1")}
           />
+          </div>
+
+           <div class="flex justify-center">
           <ThumbnailWithCaption
             title={"Image 2: Homepage"}
             src={imgSrc}
             caption={t("dc:concept1-imgCaption-1")}
           />
+          </div>
+
+           <div class="flex justify-center">
           <ThumbnailWithCaption
             title={"Image 3: Homepage"}
             src={imgSrc}
             caption={t("dc:concept1-imgCaption-1")}
           />
+          </div>
+
         </div>
-        <hr className="mt-12" />
+        </div>
       </section>
 
       <CallToAction
