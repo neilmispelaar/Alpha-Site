@@ -6,6 +6,24 @@ import { Layout } from "../../components/organisms/Layout";
 import { useRouter } from "next/router";
 import { CallToAction } from "../../components/molecules/CallToAction";
 
+function HTMList({ tag = "ul", content, listClassName, liClassName }) {
+  const parseList = (content) =>
+    content
+      .split("*") // split the string on asterisks
+      .filter((item) => item) // filter out empty strings
+      .map((item, index) => (
+        <li className={liClassName} key={index}>
+          {item.trim()}
+        </li>
+      ));
+
+  return tag === "ul" ? (
+    <ul className={listClassName}>{parseList(content)}</ul>
+  ) : (
+    <ol className={listClassName}>{parseList(content)}</ol>
+  );
+}
+
 function ThumbnailWithCaption({
   title = "Image 1",
   src = "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg",
@@ -34,7 +52,14 @@ export default function Home(props) {
   const { asPath } = useRouter();
 
   return (
-    <Layout locale={props.locale} langUrl={asPath}>
+    <Layout
+      locale={props.locale}
+      langUrl={asPath}
+      breadcrumbItems={[
+        { text: "Service Canada Labs", link: "/" },
+        { text: "Projects", link: "/projects" },
+      ]}
+    >
       <Head>
         {process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_URL ? (
           <script src={process.env.NEXT_PUBLIC_ADOBE_ANALYTICS_URL} />
@@ -65,41 +90,158 @@ export default function Home(props) {
         <p className="text-base mt-3">{t("dc:ProductGoal1")}</p>
         <p className="text-base mt-3">{t("dc:ProductGoal2")}</p>
 
-        <h2 className="text-lg mt-8">{t("dc:Concept1Heading")}</h2>
+        <h2 className="text-lg mt-10">{t("dc:Concept1Heading")}</h2>
         <p className="text-base mt-6">{t("dc:Concept1P1")}</p>
         <p className="text-base mt-6">{t("dc:Concept1P2")}</p>
         <p className="text-base mt-6">{t("dc:Concept1P3")}</p>
+        <HTMList
+          tag="ol"
+          listClassName={"text-base mt-4 ml-8 list-decimal list-outside"}
+          liClassName={"mt-1"}
+          content={t("dc:Concept1P3List")}
+        />
 
         <div className="mx-auto">
           <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 items-start gap-6">
             <ThumbnailWithCaption
               title={t("dc:Concept1ImgTitle1")}
               alt={t("dc:Concept1ImgAlt1")}
-              src={"/dc-1.1.jpg"}
+              src={"/projects/dc-1.1.jpg"}
             >
-              <div>{t("dc:Concept1ImgCaption1")}</div>
-              <ol className="ml-2 mt-2">
-                <li className="mt-1">{t("dc:Concept1ImgCaption1LI1")}</li>
-                <li className="mt-1">{t("dc:Concept1ImgCaption1LI2")}</li>
-                <li className="mt-1">{t("dc:Concept1ImgCaption1LI3")}</li>
-                <li className="mt-1">{t("dc:Concept1ImgCaption1LI4")}</li>
-                <li className="mt-1">{t("dc:Concept1ImgCaption1LI5")}</li>
-                <li className="mt-1">{t("dc:Concept1ImgCaption1LI6")}</li>
-              </ol>
+              <p className="text-sm">{t("dc:Concept1ImgCaption1")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept1ImgCaption1List")}
+              />
             </ThumbnailWithCaption>
             <ThumbnailWithCaption
               title={t("dc:Concept1ImgTitle2")}
               alt={t("dc:Concept1ImgAlt2")}
-              src={"/dc-1.2.jpg"}
+              src={"/projects/dc-1.2.jpg"}
             >
-              <div>{t("dc:Concept1ImgCaption2")}</div>
+              <p className="text-sm">{t("dc:Concept1ImgCaption2")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept1ImgCaption2List")}
+              />
             </ThumbnailWithCaption>
             <ThumbnailWithCaption
               title={t("dc:Concept1ImgTitle3")}
               alt={t("dc:Concept1ImgAlt3")}
-              src={"/dc-1.3.jpg"}
+              src={"/projects/dc-1.3.jpg"}
             >
-              <div>{t("dc:Concept1ImgCaption3")}</div>
+              <p className="text-sm">{t("dc:Concept1ImgCaption3")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept1ImgCaption3List")}
+              />
+            </ThumbnailWithCaption>
+          </div>
+        </div>
+
+        <h2 className="text-lg mt-10">{t("dc:Concept2Heading")}</h2>
+        <p className="text-base mt-6">{t("dc:Concept2P1")}</p>
+        <HTMList
+          tag="ol"
+          listClassName={"text-base mt-4 ml-8 list-decimal list-outside"}
+          liClassName={"mt-1"}
+          content={t("dc:Concept2P1List")}
+        />
+
+        <div className="mx-auto">
+          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 items-start gap-6">
+            <ThumbnailWithCaption
+              title={t("dc:Concept2ImgTitle1")}
+              alt={t("dc:Concept2ImgAlt1")}
+              src={"/projects/dc-2.1.jpg"}
+            >
+              <p className="text-sm">{t("dc:Concept2ImgCaption1")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept2ImgCaption1List")}
+              />
+            </ThumbnailWithCaption>
+            <ThumbnailWithCaption
+              title={t("dc:Concept2ImgTitle2")}
+              alt={t("dc:Concept2ImgAlt2")}
+              src={"/projects/dc-2.2.jpg"}
+            >
+              <p className="text-sm">{t("dc:Concept2ImgCaption2")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept2ImgCaption2List")}
+              />
+            </ThumbnailWithCaption>
+            <ThumbnailWithCaption
+              title={t("dc:Concept2ImgTitle3")}
+              alt={t("dc:Concept2ImgAlt3")}
+              src={"/projects/dc-2.3.jpg"}
+            >
+              <p className="text-sm">{t("dc:Concept2ImgCaption3")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept2ImgCaption3List")}
+              />
+            </ThumbnailWithCaption>
+          </div>
+        </div>
+
+        <h2 className="text-lg mt-10">{t("dc:Concept3Heading")}</h2>
+        <p className="text-base mt-6">{t("dc:Concept3P1")}</p>
+        <HTMList
+          tag="ol"
+          listClassName={"text-base mt-4 ml-8 list-decimal list-outside"}
+          liClassName={"mt-1"}
+          content={t("dc:Concept3P1List")}
+        />
+
+        <div className="mx-auto">
+          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 items-start gap-6">
+            <ThumbnailWithCaption
+              title={t("dc:Concept3ImgTitle1")}
+              alt={t("dc:Concept3ImgAlt1")}
+              src={"/projects/dc-3.1.jpg"}
+            >
+              <p className="text-sm">{t("dc:Concept3ImgCaption1")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept3ImgCaption1List")}
+              />
+            </ThumbnailWithCaption>
+          </div>
+        </div>
+
+        <h2 className="text-lg mt-10">{t("dc:Concept4Heading")}</h2>
+        <p className="text-base mt-6">{t("dc:Concept4P1")}</p>
+
+        <div className="mx-auto">
+          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 items-start gap-6">
+            <ThumbnailWithCaption
+              title={t("dc:Concept4ImgTitle1")}
+              alt={t("dc:Concept4ImgAlt1")}
+              src={"/projects/dc-4-1.jpg"}
+            >
+              <p className="text-sm">{t("dc:Concept4ImgCaption1")}</p>
+              <HTMList
+                tag="ol"
+                listClassName={"ml-6 mt-2 text-sm list-decimal list-outside"}
+                liClassName={"mt-1"}
+                content={t("dc:Concept4ImgCaption1List")}
+              />
             </ThumbnailWithCaption>
           </div>
         </div>
